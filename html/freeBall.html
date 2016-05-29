@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>freeBall</title>
+<style>
+html{overflow: hidden;}
+img{width:64px;height:64px;position: absolute;}
+#ball1{left:300px;top:0;}
+#ball2{left:364px;top:0;}
+#ball3{left:428px;top:0;}
+#ball4{left:492px;top:0;}
+#ball5{left:556px;top:0;}
+#ball6{left:620px;top:0;}
+#ball7{left:300px;top:64px;}
+#ball8{left:364px;top:64px;}
+#ball9{left:428px;top:64px;}
+#ball10{left:492px;top:64px;}
+#ball11{left:556px;top:64px;}
+#ball12{left:620px;top:64px;}
+</style>
+<script src="../js/freeBall.js"></script>
+<script>
+window.onload=function(){
+	var aImg=document.getElementsByTagName('img');
+	for(var i=0;i<aImg.length;i++){
+		freefall(aImg[i]);
+	}
+};
+</script>
+</head>
+<body>
+<img id="ball1" src="../img/ball1.png">	
+<img id="ball2" src="../img/ball2.png">
+<img id="ball3" src="../img/ball3.png">
+<img id="ball4" src="../img/ball1.png">	
+<img id="ball5" src="../img/ball2.png">
+<img id="ball6" src="../img/ball3.png">
+<img id="ball7" src="../img/ball3.png">	
+<img id="ball8" src="../img/ball1.png">
+<img id="ball9" src="../img/ball2.png">
+<img id="ball10" src="../img/ball3.png">	
+<img id="ball11" src="../img/ball1.png">
+<img id="ball12" src="../img/ball2.png">
+</body>
+</html>

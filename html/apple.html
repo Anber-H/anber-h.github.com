@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Apple</title>
+<style>
+#div1{position: absolute;left:0;bottom:0;width:100%;text-align: center;overflow: hidden;}
+</style>
+<script>
+window.onload=function(){
+	var oDiv=document.getElementById('div1');
+	var aImg=oDiv.children;
+	document.onmousemove=function(ev){
+		var oEvent=ev||event;
+		var x1=oEvent.clientX;
+		var y1=oEvent.clientY;
+		for(var i=0;i<aImg.length;i++){
+			var x2=aImg[i].offsetLeft+aImg[i].offsetWidth/2;
+			var y2=aImg[i].offsetTop+aImg[i].offsetHeight/2+oDiv.offsetTop;
+			var x=x1-x2;
+			var y=y1-y2;
+			var dis=Math.sqrt(x*x+y*y);
+			var scale=1-dis/300;
+			if(scale<0.5){
+				scale=0.5;
+			}
+			aImg[i].width=128*scale;
+		}
+	};
+};
+</script>
+</head>
+<body>
+<div id="div1">
+	<img src="../img/apple1.png" width="64">
+	<img src="../img/apple2.png" width="64">
+	<img src="../img/apple3.png" width="64">
+	<img src="../img/apple4.png" width="64">
+	<img src="../img/apple5.png" width="64">
+	<img src="../img/apple6.png" width="64">
+	<img src="../img/apple7.png" width="64">
+</div>	
+</body>
+</html>

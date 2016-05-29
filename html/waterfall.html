@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>waterfall</title>
+<style>
+*{margin:0;padding:0;list-style:none;text-decoration:none;color:#000;font-size: 12px;}	
+#falls{width:990px;overflow: hidden;margin:0 auto;}
+#falls ul{float:left;margin:0 5px;}
+#falls ul li{margin:10px 0;position: relative;}
+#falls ul li .left{width:52px;height:30px;background:#e0353e;border:2px solid #a00c24;position: absolute;left:10px;top:5px;display: none;}
+#falls ul li .left a{display:block;font:14px/30px "\5fae\8f6f\96c5\9ed1";color:#fff;text-align: center;}
+#falls ul li .right{width:46px;position: absolute;right:10px;top:5px;background: #fff;display: none;}
+#falls ul li .right a{display:inline-block;height:30px;line-height: 30px;padding:0 10px;border:1px solid #d1d8de;}
+#falls ul li .right a i{display:inline-block;width:24px;height:22px;background:url(../waterfall/syn.png);vertical-align: middle;}
+</style>
+<script>
+window.onload=function(){
+	var oDiv=document.getElementById('falls');
+	var aUl=oDiv.getElementsByTagName('ul');
+	var len=aUl.length;
+	function createLi(){
+		for(var i=0;i<12;i++){
+			var oLi=document.createElement('li');
+			oLi.innerHTML=
+			'<div class="left">\
+				<a href="javascript:;">采集</a>\
+			</div>\
+			<div class="right">\
+				<a href="javascript:;">\
+					<i></i>\
+				</a>\
+			</div>\
+			<img src="../waterfall/'+i+'.png">';
+			var arr=[];
+			for(var j=0;j<len;j++){
+				arr.push(aUl[j]);
+			}
+			arr.sort(function(oUl1,oUl2){
+				return oUl1.offsetHeight-oUl2.offsetHeight;
+			});
+			arr[0].appendChild(oLi);
+			oLi.onmouseover=function(){
+				var aDiv=this.getElementsByTagName("div");
+				for (var i = 0; i < aDiv.length; i++) {
+					aDiv[i].style.display="block";
+				};
+			};
+			oLi.onmouseout=function(){
+				var aDiv=this.getElementsByTagName("div");
+				for (var i = 0; i < aDiv.length; i++) {
+					aDiv[i].style.display="none";
+				};
+			};
+			
+		}
+
+	}
+	createLi();
+	window.onscroll=function(){
+		var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;
+		var clientH=document.documentElement.clientHeight;
+		var divH=oDiv.scrollHeight;
+		if(scrollTop+clientH>=divH){
+			createLi();
+		}
+	}
+
+};
+</script>
+</head>
+<body>
+<div id="falls">
+	<ul>
+		<!-- <li>
+			<div class="left">
+				<a href="javascript:;">采集</a>
+			</div>
+			<div class="right">
+				<a href="javascript:;">
+					<i></i>
+				</a>
+			</div>
+			<img src="../images/1.png" alt="古丽娜扎">
+		</li> -->
+	</ul>
+	<ul></ul>
+	<ul></ul>
+</div>
+</body>
+</html>

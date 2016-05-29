@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>magnifier</title>
+<style>
+*{margin:0;padding:0;}
+#magnifier{width:400px;height:400px;position: relative;margin:50px 200px;}
+#maxPic{width:400px;height:400px;position: absolute;left:410px;top:0;display: none;overflow: hidden;}
+#maxPic img{width:800px;height:800px;position: absolute;left:0;top:0;}
+#mask{width:100px;height:100px;background: #000;opacity: 0.5;filter:alpha(opacity:50);position: absolute;left:0;top:0;display: none;}
+</style>
+<script>
+window.onload=function(){
+	var oMag=document.getElementById('magnifier');
+	var oMaxPic=document.getElementById('maxPic');
+	var oMask=document.getElementById('mask');
+	var oImg=document.getElementById('img1');
+	oMag.onmousemove=function(ev){
+		var oEvent=ev||event;
+		var l=oEvent.clientX-oMag.offsetLeft-oMask.offsetWidth/2;
+		var t=oEvent.clientY-oMag.offsetTop-oMask.offsetHeight/2;
+		var maxW=oMag.offsetWidth-oMask.offsetWidth;
+		var maxH=oMag.offsetHeight-oMask.offsetHeight;
+		if(l<0){
+			l=0;
+		}else if(l>maxW){
+			l=maxW;
+		}
+		if(t<0){
+			t=0;
+		}else if(t>maxH){
+			t=maxH;
+		}
+		var scaleX=l/maxW;
+		var scaleY=t/maxH;
+		oImg.style.left=-scaleX*(oImg.offsetWidth-oMaxPic.offsetWidth)+"px";
+		oImg.style.top=-scaleY*(oImg.offsetHeight-oMaxPic.offsetHeight)+"px";
+		oMask.style.left=l+"px";
+		oMask.style.top=t+"px";
+	};
+	oMag.onmouseover=function(){
+		oMask.style.display="block";
+		oMaxPic.style.display="block";
+	};
+	oMag.onmouseout=function(){
+		oMask.style.display="none";
+		oMaxPic.style.display="none";
+	};
+};
+</script>
+</head>
+<body>
+<div id="magnifier">
+	<img src="../img/min.jpg" alt="图片不存在">
+	<div id="maxPic"><img id="img1" src="../img/max.jpg" alt="图片不存在"></div>
+	<span id="mask"></span>
+</div>
+</body>
+</html>

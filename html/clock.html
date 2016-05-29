@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="author" content="智能社 - zhinengshe.com" />
+<meta name="copyright" content="智能社 - zhinengshe.com" />
+<title>clock</title>
+<style>
+body{background:#000;}
+#c1{background:#fff;}
+</style>
+<script>
+function d2a(n){
+	return n*Math.PI/180;
+}
+window.onload = function(){
+	
+	var oC = document.getElementById("c1");
+ 	var gd = oC.getContext("2d");
+	 
+	var cx = 300;
+	var cy = 200;
+	
+	
+	setInterval(function(){
+		gd.clearRect(0,0,oC.width,oC.height);
+		var oDate = new Date();
+		var iH = oDate.getHours();
+		var iM = oDate.getMinutes();
+		var iS = oDate.getSeconds();
+		var iMs = oDate.getMilliseconds();
+		
+		drawArc(cx,cy,80,0,iH%12*30 + iM/60*30,"#0CF");
+		drawArc(cx,cy,100,0,iM*6 + iS/60*6,"#4F0");
+		drawArc(cx,cy,120,0,iS*6 + iMs/1000*6,"#F04");
+	
+		
+		var str = [iH,iM,iS].join(":");
+		var h = 30;
+		gd.font = "bold " +h + "px kaiti";
+		var w = gd.measureText(str).width;
+		
+		gd.fillText(str,cx - w/2,cy + h/2);
+		
+	},16);
+	
+	
+	
+	
+	
+	function drawArc(cx,cy,r,start,end,color){
+		
+		start -= 90;
+		end -= 90;
+		
+		gd.beginPath();
+		gd.lineWidth = "20";
+		gd.strokeStyle = color;
+		gd.arc(cx,cy,r,d2a(start),d2a(end),false);
+		gd.stroke();
+		 
+	}
+	
+	
+	var oBtn = document.getElementById("btn1");
+	//var oImg = document.getElementById("img1");
+	oBtn.onclick = function(){
+		//
+		//var str = oC.toDataURL("image/jpeg");
+		//var str = oC.toDataURL("image/png");
+		var str = oC.toDataURL("image/gif");//不支持
+		
+		window.open(str);
+	};
+ 
+	
+	
+};
+
+</script>
+</head>
+
+<body>
+
+<input id="btn1" type="button" value="拍照" />
+
+<canvas id="c1" width="800" height="500" ></canvas>
+
+</body>
+</html>
